@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Doctolib appointment notifier</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#dropdownInput').on('input', function() {
+			var inputVal = $(this).val();
+			$('.dropdown-menu').empty(); // Clear previous options
+			if(inputVal.length > 0){
+				// Assuming you have a function getDropdownSuggestions that fetches the relevant suggestions based on the user's input
+				getDropdownSuggestions(inputVal).forEach(function(suggestion){
+					$('.dropdown-menu').append('<a class="dropdown-item" href="#">' + suggestion + '</a>');
+				});
+				$('.dropdown-menu').dropdown('show'); // Show the dropdown
+			} else {
+				$('.dropdown-menu').dropdown('hide'); // Hide the dropdown if input is empty
+			}
+		});
+
+		// Function to simulate fetching suggestions
+		function getDropdownSuggestions(input) {
+			// Replace this with actual AJAX call or other logic to get suggestions
+			return ['Suggestion 1', 'Suggestion 2', 'Suggestion 3']; // Dummy suggestions
+		}
+	});
+</script>
+<body>
+
+<div class="dropdown">
+	<label for="dropdownInput"></label>
+	<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" id="dropdownInput" aria-haspopup="true" aria-expanded="false" placeholder="Type here...">
+	<div class="dropdown-menu" aria-labelledby="dropdownInput">
+		<!-- Dropdown items will be populated here based on input -->
+	</div>
+</div>
+</body>
+
+</html>
