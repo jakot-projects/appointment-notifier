@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 
 const val SITE_BASE_URL = "https://www.doctolib.de"
 const val AVAILABLE_TIMES_API = "/availabilities.json"
-val DOCTOR_IDS = arrayListOf("638502", "861116", "336323", "336693", "336322", "336321")
+val DOCTOR_IDS = arrayListOf(/*"638502", "861116", "336323", "336693", "336322",*/ "336321")
 val SEARCH_DATA_DEFAULT = FirstAvailableSearchData(visitMotive = "2126313", practice = "133110", doctor = "638502", dateThreshold = LocalDate.now())
 
 fun buildAvailableTimesQuery(visitMotive: String, agendaId: String, practiceId: String, startDate: String): String {

@@ -6,7 +6,7 @@ data class Availabilities(
     val total: Int,
     val availabilities: List<Availability>,
     @JsonProperty("next_slot")
-    val nextSlot: String
+    val nextSlot: String?
 )
 
 data class Availability(

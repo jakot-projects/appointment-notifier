@@ -1,1 +1,4 @@
-
+telegram:
+  bot:
+    name: Appointment Notifier Bot
+    token: {TELEGRAM_BOT_TOKEN}

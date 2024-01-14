@@ -12,13 +12,15 @@ class DoctolibService(
         val availableTimes = doctolibRestClient.getAvailableTimes(buildAvailableTimesQuery(firstAvailableSearchData))
             ?: throw RuntimeException("A problem occurred while getting available times")
         if (availableTimes.total > 0) {
-            availableTimes.availabilities.forEach { availability ->
-                LocalDate.parse(availability.slots.min(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).let {
-                    if (it.isBefore(firstAvailableSearchData.dateThreshold)) {
-                        return it
+            availableTimes.availabilities
+                .filter { it.slots.isNotEmpty() }
+                .forEach { availability ->
+                    LocalDate.parse(availability.slots.min(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).let {
+                        if (it.isBefore(firstAvailableSearchData.dateThreshold)) {
+                            return it
+                        }
                     }
                 }
-            }
         } else {
             LocalDate.parse(availableTimes.nextSlot, DateTimeFormatter.ISO_OFFSET_DATE_TIME).let {
                 if (it.isBefore(firstAvailableSearchData.dateThreshold)) {
