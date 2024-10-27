@@ -3,12 +3,7 @@ telegram:
     name: Appointment Notifier Bot
     token: { TELEGRAM_BOT_TOKEN }
 spring:
-  cloud:
-    aws:
-      credentials:
-        access-key: { AWS_ACCESS_KEY }
-        secret-key: { AWS_SECRET_KEY }
-      dynamodb:
-        region: { AWS_REGION }
-        endpoint: { AWS_DYNAMODB_ENDPOINT }
-
+  datasource:
+    url: jdbc:postgresql://localhost:5432/anotifier
+    password: postgres
+    username: postgres
