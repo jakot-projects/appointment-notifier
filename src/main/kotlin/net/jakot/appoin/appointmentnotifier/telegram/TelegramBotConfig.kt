@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession
 
 @Configuration
-class TelegramBotConfig {
+class TelegramBotConfig(val router: TelegramBotRouter) {
 
     @Value("\${telegram.bot.token}")
     private lateinit var botToken: String
@@ -21,12 +21,13 @@ class TelegramBotConfig {
     private lateinit var botName: String
 
     @Bean
-    fun telegramBot(router: TelegramBotRouter): TelegramBot {
+    fun telegramBot(): TelegramBot {
         return TelegramBot(botToken, botName, router)
     }
 
     @EventListener(ContextRefreshedEvent::class)
-    fun registerTelegramBot(telegramBot: TelegramBot) {
+    fun registerTelegramBot(event: ContextRefreshedEvent) {
+        val telegramBot = telegramBot()
         TelegramBotsApi(DefaultBotSession::class.java).registerBot(telegramBot)
         initializeBot(telegramBot)
     }
