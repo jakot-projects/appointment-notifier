@@ -11,7 +11,11 @@ class DoctolibRestClient(
 ) {
 
     fun getAvailableTimes(query: String): Availabilities? {
-        val responseEntity = doctolibRestTemplate.exchange("$AVAILABLE_TIMES_API?$query", HttpMethod.GET, null, Availabilities::class.java)
+        val responseEntity = doctolibRestTemplate.exchange(
+            "$AVAILABLE_TIMES_API?$query",
+            HttpMethod.GET,
+            null,
+            Availabilities::class.java)
         return responseEntity.body
     }
 }

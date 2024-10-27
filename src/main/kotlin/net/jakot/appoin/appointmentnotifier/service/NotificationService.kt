@@ -11,7 +11,7 @@ import java.time.LocalDate
 private val DATE_THRESHOLD = LocalDate.of(2024, 1, 10)
 
 @Service
-class NotificationService (
+class NotificationService(
     private val doctolibService: DoctolibService,
     private val telegramBotService: TelegramBotService
 ) {
@@ -19,7 +19,11 @@ class NotificationService (
         log.info { "Checking available appointments" }
         DOCTOR_IDS.forEach { doctorId ->
             log.info { "Checking available appointments for doctor $doctorId" }
-            doctolibService.firstAvailableBefore(SEARCH_DATA_DEFAULT.copy(doctor = doctorId, dateThreshold = DATE_THRESHOLD))?.let {
+            val searchData = SEARCH_DATA_DEFAULT.copy(
+                doctor = doctorId,
+                dateThreshold = DATE_THRESHOLD
+            )
+            doctolibService.firstAvailableBefore(searchData)?.let {
                 log.info { "First available appointment for doctor $doctorId is $it" }
                 telegramBotService.sendNotification("First available appointment for doctor $doctorId is $it")
             } ?: let {
