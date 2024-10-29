@@ -6,10 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.Scheduled
 
-const val CRON_EVERY_10_MINUTES = "0 * * * * *"
-
 val log = KotlinLogging.logger {}
-
 
 @Configuration
 @EnableScheduling
@@ -19,6 +16,6 @@ class SchedulingConfig(
 
     @Scheduled(cron = CRON_EVERY_10_MINUTES)
     fun scheduleCheckAvailableAppointments() {
-        notificationService.sendNotification()
+        //notificationService.sendNotification()
     }
 }
